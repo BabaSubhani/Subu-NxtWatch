@@ -6,8 +6,8 @@ export const VideoItemDetailsAppContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   background-color: #ffffff;
-  height: 100vh;
-  padding-top: 20px;
+  height: 100%;
+  padding-top: 80px;
 `
 
 export const BottomDetailsContainer = styled.div`
@@ -17,7 +17,6 @@ export const BottomDetailsContainer = styled.div`
 export const Title = styled.p`
   font-family: 'Roboto';
   font-size: 19px;
-  color: #1e293b;
 `
 export const LikesAndDurationUl = styled.ul`
   display: flex;
@@ -29,6 +28,9 @@ export const LikesAndDurationUl = styled.ul`
 
 export const ListItem = styled.li`
   font-family: 'Roboto';
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 export const ChannelInformationContainer = styled.div`
@@ -64,4 +66,10 @@ export const Description = styled.p`
   font-family: 'Roboto';
   padding-top: 20px;
   padding-bottom: 20px;
+`
+
+export const ButtonContainer = styled.button`
+  padding: 0px;
+  background-color: transparent;
+  border: 0px solid;
 `

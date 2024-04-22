@@ -14,6 +14,7 @@ import {
 const HomeVideos = props => {
   const {videosData} = props
   const {isDark} = useContext(ThemeContext)
+  const profileDetailsBgColor = isDark ? '#222222' : '#ffffff'
 
   return (
     <>
@@ -33,12 +34,17 @@ const HomeVideos = props => {
         return (
           <Link
             to={`/videos/${id}`}
-            style={{textDecoration: 'none', color: isDark ? '#fff' : '#222222'}}
+            style={{
+              textDecoration: 'none',
+              color: isDark ? '#ffffff' : '#222222',
+            }}
             key={id}
           >
             <VideoListItemContainer>
               <ThumbnailImg src={thumbnailUrl} />
-              <ProfileImgAndDetailsContainer>
+              <ProfileImgAndDetailsContainer
+                style={{backgroundColor: {profileDetailsBgColor}}}
+              >
                 <ProfileImg src={profileImageUrl} />
                 <DetailsContainer>
                   <Title>{title}</Title>

@@ -27,3 +27,28 @@
   border: 0px solid;
   background-color: transparent;
 }
+
+.dark {
+  color: #222222;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.logout-popup-container {
+  height: 150px;
+  width: 250px;
+  background-color: #cbd5e1;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.routes-popup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  height: 100%;
+}

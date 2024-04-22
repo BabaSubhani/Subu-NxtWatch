@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const TrendingTopContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 70px;
 `
 
 export const TrendingNameAndImgContainer = styled.div`

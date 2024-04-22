@@ -12,6 +12,7 @@ import './App.css'
 class App extends Component {
   state = {
     isDark: false,
+    savedItems: [],
   }
 
   toggleTheme = () => {
@@ -20,11 +21,26 @@ class App extends Component {
     }))
   }
 
+  updateItems = id => {
+    console.log(id)
+    this.setState(prevState => ({
+      savedItems: [...prevState.savedItems, id],
+    }))
+  }
+
   render() {
-    const {isDark} = this.state
+    const {isDark, savedItems} = this.state
+    console.log(savedItems)
 
     return (
-      <ThemeContext.Provider value={{isDark, toggleTheme: this.toggleTheme}}>
+      <ThemeContext.Provider
+        value={{
+          isDark,
+          toggleTheme: this.toggleTheme,
+          savedItems,
+          updateItems: this.updateItems,
+        }}
+      >
         <div>
           <Switch>
             <Route exact path="/login" component={Login} />

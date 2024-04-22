@@ -24,6 +24,7 @@ export const ProfileImgAndDetailsContainer = styled.div`
 export const ProfileImg = styled.img`
   height: 40px;
   margin-top: 12px;
+  margin-right: 10px;
 `
 
 export const DetailsContainer = styled.div``

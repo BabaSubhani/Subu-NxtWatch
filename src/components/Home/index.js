@@ -21,13 +21,14 @@ import {
   VideosUlListContainer,
   RenderingMultipleStates,
 } from './styledComponents'
+import './index.css'
 
 class Home extends Component {
   state = {
     showBanner: true,
     videosData: [],
     searchVal: '',
-    status: 'INITIAL', // Add status to track API status
+    status: 'INITIAL',
   }
 
   componentDidMount() {
@@ -35,7 +36,7 @@ class Home extends Component {
   }
 
   getVideosData = async () => {
-    this.setState({status: 'LOADING'}) // Set status to loading
+    this.setState({status: 'LOADING'})
     const jwtToken = Cookies.get('jwt_token')
     const {searchVal} = this.state
 
@@ -58,7 +59,7 @@ class Home extends Component {
           viewCount: eachItem.view_count,
           title: eachItem.title,
         }))
-        this.setState({videosData: newData, status: 'SUCCESS'}) // Set status to success
+        this.setState({videosData: newData, status: 'SUCCESS'})
       } else {
         throw new Error('Failed to fetch data') // Throw error for failure
       }
@@ -134,6 +135,9 @@ class Home extends Component {
         {value => {
           const {isDark} = value
           const color = isDark ? '#181818' : '#f9f9f9'
+          const searchInputClass = isDark
+            ? 'dark-search-input '
+            : 'light-search-input'
 
           return (
             <HomeTopContainer backgroundColor={color}>
@@ -159,8 +163,12 @@ class Home extends Component {
                   type="search"
                   value={searchVal}
                   onChange={this.changeSearchValue}
+                  className={searchInputClass}
                 />
-                <SearchIconContainer onClick={this.filterTheListItems}>
+                <SearchIconContainer
+                  onClick={this.filterTheListItems}
+                  className={searchInputClass}
+                >
                   <BsSearch />
                 </SearchIconContainer>
               </SearchAndIconContainer>

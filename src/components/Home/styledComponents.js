@@ -4,10 +4,11 @@ export const HomeTopContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${props => props.backgroundColor};
+  padding-top: 70px;
 `
 
 export const BannerContainer = styled.div`
-  // background-color: #ffffff;
+  background-color: #ffffff;
   padding: 20px;
 `
 
@@ -45,13 +46,13 @@ export const SearchAndIconContainer = styled.div`
   margin-left: 14px;
   margin-right: 14px;
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
 `
 
 export const SearchInput = styled.input`
   width: 80%;
   height: 100%;
-  border: 1px solid #222222;
+
   padding-left: 8px;
   font-family: 'Roboto';
   font-size: 18px;
@@ -64,7 +65,6 @@ export const SearchIconContainer = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 1px solid #222222;
 `
 
 export const VideosUlListContainer = styled.ul`

@@ -5,6 +5,7 @@ import {HiFire} from 'react-icons/hi'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import HomeVideos from '../HomeVideos'
+import ThemeContext from '../../context/ThemeContext'
 
 import {
   TrendingTopContainer,
@@ -13,7 +14,7 @@ import {
   TrendingText,
   Button,
   RenderingMultipleStates,
-} from './styledComponents' // Importing styled components from the same file
+} from './styledComponents'
 
 class Trending extends Component {
   state = {
@@ -104,23 +105,35 @@ class Trending extends Component {
     }
 
     return (
-      <TrendingTopContainer>
-        <Header />
-        <TrendingNameAndImgContainer>
-          <HiFire
-            style={{
-              color: 'red',
-              fontSize: '40px',
-              backgroundColor: '#d7dfe9',
-              height: '45px',
-              width: '45px',
-              borderRadius: '50px',
-            }}
-          />
-          <TrendingText>Trending</TrendingText>
-        </TrendingNameAndImgContainer>
-        {this.renderMultipleStates()}
-      </TrendingTopContainer>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDark} = value
+          const containerStyles = {
+            backgroundColor: isDark ? '#181818' : '#f9f9f9',
+            color: isDark ? '#fff' : '#000',
+          }
+
+          return (
+            <TrendingTopContainer style={containerStyles}>
+              <Header />
+              <TrendingNameAndImgContainer>
+                <HiFire
+                  style={{
+                    color: 'red',
+                    fontSize: '40px',
+                    backgroundColor: '#d7dfe9',
+                    height: '45px',
+                    width: '45px',
+                    borderRadius: '50px',
+                  }}
+                />
+                <TrendingText>Trending</TrendingText>
+              </TrendingNameAndImgContainer>
+              {this.renderMultipleStates()}
+            </TrendingTopContainer>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

@@ -1,5 +1,7 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
+import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
+import {BiListPlus} from 'react-icons/bi'
 import Cookies from 'js-cookie'
 import ReactPlayer from 'react-player'
 import Header from '../Header'
@@ -17,6 +19,7 @@ import {
   Channel,
   Subscribers,
   Description,
+  ButtonContainer,
 } from './styledComponents'
 
 const apiStatus = {
@@ -27,7 +30,11 @@ const apiStatus = {
 }
 
 class VideoItemDetails extends Component {
-  state = {status: apiStatus.initial, videoItemData: {}}
+  state = {
+    status: apiStatus.initial,
+    videoItemData: {},
+    isLike: true,
+  }
 
   componentDidMount() {
     this.getVideoDetails()
@@ -83,18 +90,21 @@ class VideoItemDetails extends Component {
     }
   }
 
+  clickSave = id => {
+    const {updateItems} = this.context
+    console.log(id)
+    updateItems(id)
+  }
+
   renderLoadingView = () => (
     <div className="loader-container" data-testid="loader">
       <Loader type="ThreeDots" color="#222222" height="50" width="50" />
     </div>
   )
 
-  clickSave = id => {
-    console.log(id)
-  }
-
   renderSuccessView = () => {
-    const {videoItemData} = this.state
+    const {videoItemData, isLike} = this.state
+
     const {
       videoUrl,
       title,
@@ -106,7 +116,12 @@ class VideoItemDetails extends Component {
     const {name, profileImageUrl} = videoItemData.channel
     return (
       <>
-        <div style={{width: '100%', margin: '10 auto'}}>
+        <div
+          style={{
+            width: '100%',
+            margin: '10 auto',
+          }}
+        >
           <ReactPlayer url={videoUrl} width="100%" height="250px" controls />
           <BottomDetailsContainer>
             <Title>{title}</Title>
@@ -118,16 +133,22 @@ class VideoItemDetails extends Component {
             </LikesAndDurationUl>
             <LikesAndDurationUl>
               <ListItem style={{listStyleType: 'none', marginRight: '27px'}}>
-                Like
+                <ButtonContainer type="button">
+                  <AiOutlineLike style={{fontSize: '23px'}} />
+                </ButtonContainer>
+
+                <p>Like</p>
               </ListItem>
               <ListItem style={{listStyleType: 'none', marginRight: '27px'}}>
-                Dislike
+                <AiOutlineDislike style={{fontSize: '23px'}} />
+                <p>Dislike</p>
               </ListItem>
               <ListItem
                 style={{listStyleType: 'none', marginRight: '27px'}}
-                onClick={this.clickSave(id)}
+                onClick={() => this.clickSave(id)}
               >
-                Save
+                <BiListPlus style={{fontSize: '23px'}} />
+                <p>Save</p>
               </ListItem>
             </LikesAndDurationUl>
             <hr style={{marginTop: '25px'}} />
@@ -162,12 +183,24 @@ class VideoItemDetails extends Component {
 
   render() {
     return (
-      <>
-        <Header />
-        <VideoItemDetailsAppContainer>
-          {this.renderMultipleStates()}
-        </VideoItemDetailsAppContainer>
-      </>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDark} = value
+          const containerStyles = {
+            backgroundColor: isDark ? '#181818' : '#f9f9f9',
+            color: isDark ? '#fff' : '#000',
+          }
+
+          return (
+            <>
+              <Header />
+              <VideoItemDetailsAppContainer style={containerStyles}>
+                {this.renderMultipleStates()}
+              </VideoItemDetailsAppContainer>
+            </>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

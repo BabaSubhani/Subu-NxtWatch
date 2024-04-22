@@ -1,0 +1,9 @@
+.dark-search-input {
+  background-color: #222222;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+.light-search-input {
+  background-color: #ffffff;
+}
